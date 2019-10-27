@@ -31,7 +31,7 @@ app.get("/campgrounds", (req, res) => {
 })
 
 app.get("/campgrounds/new", (req, res) => {
-	res.render("newCamp")
+	res.render("new")
 })
 
 app.post("/campgrounds", (req, res) => {
@@ -50,7 +50,7 @@ app.post("/campgrounds", (req, res) => {
 app.get("/campgrounds/:id", (req, res) => {
 	Campground.findById(req.params.id, (err, campground) => {
 		if (err) console.log(err)
-		else res.render("detailCamp", {campground})
+		else res.render("show", {campground})
 	})
 })
 

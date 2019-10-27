@@ -14,15 +14,15 @@
 
 <div class="row">
 
-<% campgrounds.forEach(camp => { %>
+<% campgrounds.forEach(campground => { %>
 	<div class="col-sm-6 col-md-3 mb-4">
 		<div class="card h-100">
-			<img class="card-img-top" src="<%= camp.image %>">
+			<img class="card-img-top" src="<%= campground.image %>">
 			<div class="card-body">
 				<h5 class="card-title">
-					<%= camp.name %>
+					<%= campground.name %>
 				</h5>
-			<a href="/campgrounds/<%= camp.id %>" class="btn btn-primary">I want to know more!</a>
+			<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
 			</div>
 		</div>
 	</div>

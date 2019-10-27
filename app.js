@@ -18,15 +18,6 @@ const campgroundSchema = new mongoose.Schema({
 
 const Campground = mongoose.model("Campground", campgroundSchema)
 
-//Campground.create({
-//	name: "Mountain Goat's", image: "https://images.unsplash.com/photo-1537225228614-56cc3556d7ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-//}, (err, campground) => {
-//	if (err) console.log(err)
-//	else console.log(campground)
-// })
-
-//
-
 app.get("/", (req, res) => {
 	res.render("landing")
 })
@@ -34,7 +25,7 @@ app.get("/", (req, res) => {
 app.get("/campgrounds", (req, res) => {
 	Campground.find({}, (err, campgrounds) => {
 		if (err) console.log(err)
-		else res.render("campgrounds", {campgrounds})
+		else res.render("index", {campgrounds})
 	})
 	
 })
@@ -44,27 +35,23 @@ app.get("/campgrounds/new", (req, res) => {
 })
 
 app.post("/campgrounds", (req, res) => {
-	// campgrounds.push({name: req.body.name, image: req.body.image})
 	Campground.create({
 		name: req.body.name, 
 		image: req.body.image,
 		description: req.body.description
 	}, (err, newCamp) => {
 		if (err) console.log(err)
-		else res.redirect("campgrounds")
+		else res.redirect("index")
 	})
 	
 })
 
+
 app.get("/campgrounds/:id", (req, res) => {
-	// const detailCamp = req.body
-	Campground.find({
-		id: req.params.id
-	}), (err, detailCamp) => {
+	Campground.findById(req.params.id, (err, campground) => {
 		if (err) console.log(err)
-		else res.render("detailCamp", {detailCamp})
-	}
-	
+		else res.render("detailCamp", {campground})
+	})
 })
 
 

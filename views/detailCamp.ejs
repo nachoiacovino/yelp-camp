@@ -2,8 +2,13 @@
 
 <div class="container">
 	<h1 class="text-center my-4">
-		<%= detailCamp.name %>
+		<%= campground.name %>
 	</h1>
+	<img class="img-fluid" src="<%= campground.image %>">
+	<p class="my-4">
+		<%= campground.description %>
+	</p>
 </div>
+
 
 <% include partials/footer %>

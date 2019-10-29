@@ -3,6 +3,7 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose"),
 	  Campground = require("./models/campground"),
+	  Comment    = require("./models/comment")
 	  seedDB     = require("./seeds")
 
 	  
@@ -20,13 +21,12 @@ app.get("/", (req, res) => {
 app.get("/campgrounds", (req, res) => {
 	Campground.find({}, (err, campgrounds) => {
 		if (err) console.log(err)
-		else res.render("index", {campgrounds})
+		else res.render("campgrounds/index", {campgrounds})
 	})
-	
 })
 
 app.get("/campgrounds/new", (req, res) => {
-	res.render("new")
+	res.render("campgrounds/new")
 })
 
 app.post("/campgrounds", (req, res) => {
@@ -41,14 +41,38 @@ app.post("/campgrounds", (req, res) => {
 	
 })
 
-
 app.get("/campgrounds/:id", (req, res) => {
 	Campground.findById(req.params.id).populate("comments").exec((err, campground) => {
 		if (err) console.log(err)
-		else res.render("show", {campground})
+		else res.render("campgrounds/show", {campground})
 	})
 })
 
+app.get("/campgrounds/:id/comments/new", (req, res) => {
+	Campground.findById(req.params.id, (err, campground) => {
+		if (err) {
+			console.log(err)
+			redirect("/campgrounds")
+		} else res.render("comments/new", {campground})
+
+	})
+})
+
+app.post("/campgrounds/:id/comments", (req, res) => {
+	Campground.findById(req.params.id, (err, campground) => {
+		if (err) console.log(err)
+		else {
+			Comment.create(req.body.comment, (err, comment) => {
+				if (err) console.log(err)
+				else {
+					campground.comments.push(comment)
+					campground.save()
+					res.redirect(`/campgrounds/${campground._id}`)
+				}
+			})
+		}
+	})
+})
 
 
 

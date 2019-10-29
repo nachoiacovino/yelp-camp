@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <div class="container">
 	<h1 class="text-center my-4">
@@ -9,10 +9,16 @@
 		<%= campground.description %>
 	</p>
 	
+	<div class="d-flex align-items-center mb-2">
+		<h2 class="display-4">
+			Comments
+		</h2>
+		<a class="btn btn-primary btn-lg ml-4" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+	</div>
 	<% for (comment of campground.comments) { %>
 	<p><%= comment.author %> - <%= comment.text %></p>
 	<% } %>
 </div>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>

@@ -8,6 +8,10 @@
 	<p class="my-4">
 		<%= campground.description %>
 	</p>
+	
+	<% for (comment of campground.comments) { %>
+	<p><%= comment.author %> - <%= comment.text %></p>
+	<% } %>
 </div>
 
 

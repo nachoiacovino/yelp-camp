@@ -1,22 +1,17 @@
-const express = require("express"),
+const express    = require("express"),
+	  app        = express(),
 	  bodyParser = require("body-parser"),
-	  mongoose = require("mongoose"),
-	  app = express()
+	  mongoose   = require("mongoose"),
+	  Campground = require("./models/campground"),
+	  seedDB     = require("./seeds")
 
+	  
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true })
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set("view engine", "ejs")
-
-// SCHEMA SETUP
-const campgroundSchema = new mongoose.Schema({
-	name: String,
-	image: String,
-	description: String
-})
-
-const Campground = mongoose.model("Campground", campgroundSchema)
+seedDB()
 
 app.get("/", (req, res) => {
 	res.render("landing")
@@ -41,14 +36,14 @@ app.post("/campgrounds", (req, res) => {
 		description: req.body.description
 	}, (err, newCamp) => {
 		if (err) console.log(err)
-		else res.redirect("index")
+		else res.redirect("/campgrounds")
 	})
 	
 })
 
 
 app.get("/campgrounds/:id", (req, res) => {
-	Campground.findById(req.params.id, (err, campground) => {
+	Campground.findById(req.params.id).populate("comments").exec((err, campground) => {
 		if (err) console.log(err)
 		else res.render("show", {campground})
 	})

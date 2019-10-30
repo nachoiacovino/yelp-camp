@@ -11,7 +11,7 @@ const seeds = [
     {
         name: "British Columbia", 
         image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-        description: "In British Columbia, we are fortunate to have more than 1,000 provincial parks and recreation sites, seven national parks, and hundreds of private campgrounds and RV sites. That alone can feel overwhelming, but camping is one of the most Canadian experiences you can have. If you’ve never been, or if you’re just starting to explore what camping is all about, here are a few helpful tips to get your stakes in the ground. "
+        description: "In British Columbia, we are fortunate to have more than 1,000 provincial parks and recreation sites, seven national parks, and hundreds of private campgrounds and RV sites. That alone can feel overwhelming, but camping is one of the most Canadian experiences you can have. If you’ve never been, or if you’re just starting to explore what camping is all about, here are a few helpful tips to get your stakes in the ground."
     },
     {
         name: "Flaming Gorge Reservoir", 

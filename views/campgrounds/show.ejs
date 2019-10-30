@@ -23,6 +23,9 @@
                         <p class="card-text">
                             <%= campground.description %>
                         </p>
+						<p class="card-text">
+                            <em>Submitted by <%= campground.author.username %></em>
+                        </p>
                     </div>
                 </div>
                 <div class="card my-4 bg-light">
@@ -34,7 +37,7 @@
 						<hr>
 						<% for (comment of campground.comments) { %>
 							<p class="card-text float-right">10 days ago</p>
-							<p class="card-text"><strong><%= comment.author %></strong></p>
+							<p class="card-text"><strong><%= comment.author.username %></strong></p>
 							<p class="card-text-"><%= comment.text %></p>
 							<hr>
 						<% } %>

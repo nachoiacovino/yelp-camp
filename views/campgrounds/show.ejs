@@ -23,6 +23,11 @@
                         <p class="card-text">
                             <%= campground.description %>
                         </p>
+						<hr>
+						<form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+							<button class="float-right btn btn-sm btn-danger">Delete</button>
+						</form>
+						<a href="/campgrounds/<%= campground._id %>/edit" class="float-right btn btn-sm btn-info mr-1">Edit</a>
 						<p class="card-text">
                             <em>Submitted by <%= campground.author.username %></em>
                         </p>
@@ -30,7 +35,7 @@
                 </div>
                 <div class="card my-4 bg-light">
 					<div class="card-body">
-						<a href="/campgrounds/<%= campground._id %>/comments/new" class="float-right btn btn-primary">Leave a review</a>
+						<a href="/campgrounds/<%= campground._id %>/comments/new" class="float-right btn btn-success">Leave a review</a>
 						<h3 class="card-title">
 							Reviews
 						</h3>

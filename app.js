@@ -1,12 +1,13 @@
-const express       = require("express"),
-	  bodyParser    = require("body-parser"),
-	  mongoose      = require("mongoose"),
-	  passport      = require("passport"),
-	  LocalStrategy = require("passport-local"),
-	  Campground    = require("./models/campground"),
-	  Comment       = require("./models/comment"),
-	  User          = require("./models/user")
-	  seedDB        = require("./seeds")
+const express        = require("express"),
+	  bodyParser     = require("body-parser"),
+	  mongoose       = require("mongoose"),
+	  passport       = require("passport"),
+	  LocalStrategy  = require("passport-local"),
+	  methodOverride = require("method-override"),
+	  Campground     = require("./models/campground"),
+	  Comment        = require("./models/comment"),
+	  User           = require("./models/user")
+	  seedDB         = require("./seeds")
 
 const commentRoutes    = require("./routes/comments"),
 	  campgroundRoutes = require("./routes/campgrounds"),
@@ -14,10 +15,11 @@ const commentRoutes    = require("./routes/comments"),
 
 	  
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true })
+mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true, useFindAndModify: false })
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride("_method"))
 app.set("view engine", "ejs")
 // seedDB()
 

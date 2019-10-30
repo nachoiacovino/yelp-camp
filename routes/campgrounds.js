@@ -42,4 +42,29 @@ router.get("/:id", (req, res) => {
 	})
 })
 
+router.get("/:id/edit", (req, res) => {
+	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, campground) => {
+		if (err) res.redirect("/campgrounds/" + campground._id)
+		else res.render("campgrounds/edit", {campground})
+	})
+})
+
+router.put("/:id", (req, res) => {
+	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, campground) => {
+		if (err) res.redirect("/campgrounds/" + campground._id)
+		else res.redirect("/campgrounds/" + campground._id)
+	})
+})
+
+router.delete("/:id", (req, res, next) => {
+	Campground.findById(req.params.id, (err, campground) => {
+		if (err) return next(err)
+		else {
+			campground.deleteOne()
+			// req.flash('success', 'Campground deleted successfully!')
+			res.redirect("/campgrounds")
+		}
+	})
+})
+
 module.exports = router
